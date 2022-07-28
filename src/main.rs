@@ -23,7 +23,8 @@ fn main() {
     // println!("{:?}", dom);
 
     let readme = Readme::new(&content);
-    println!("{:?}", readme.blocks)
+    println!("{:?}", readme.blocks);
+    println!("{:?}", readme.params);
 
 
 

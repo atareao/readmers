@@ -1,10 +1,10 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, hash::Hash};
 
 use regex::Regex;
 
 
 pub struct Readme{
-    params: HashMap<String, String>,
+    pub params: HashMap<String, String>,
     pub blocks: Vec<String>,
 
 }
@@ -12,9 +12,20 @@ pub struct Readme{
 impl Readme {
     pub fn new(content: &str) -> Self{
         Self {
-            params: HashMap::new(),
+            params: Self::get_params(content),
             blocks: Self::get_blocks(content),
         }
+    }
+
+    fn get_params(content: &str) -> HashMap<String, String>{
+        let mut params: HashMap<String, String> = HashMap::new();
+        let param_block = Self::get_block_content("params", content);
+        println!("{}", &param_block);
+        let re = Regex::new(r"(.*)\s*:\s*(.*)\n").unwrap();
+        for cap in re.captures_iter(&param_block){
+            params.insert(cap[1].to_string(), cap[2].to_string());
+        }
+        params
     }
 
     fn get_blocks(content: &str) -> Vec<String>{
@@ -34,8 +45,8 @@ impl Readme {
         blocks
     }
 
-    fn get_block_content(&self, tag: &str, content: &str) -> String{
-        let pattern = format!(r"<!--\sstart\s{c}\s-->\n<!--\n([\S\s]*)-->\n<!--\send\s{c}\s-->", c = content);
+    fn get_block_content(tag: &str, content: &str) -> String{
+        let pattern = format!(r"<!--\sstart\s{c}\s-->\n<!--\n([\S\s]*)-->\n<!--\send\s{c}\s-->", c = tag);
         let re = Regex::new(&pattern).unwrap();
         re.captures(content).unwrap()[1].to_string()
     }
