@@ -20,12 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use std::collections::HashMap;
 use regex::Regex;
 
+pub struct Param{
+    pub key: String,
+    pub value: String,
+    pub help: String,
+}
+
+impl Param{
+    pub fn new(key: &str, value: &str, help: &str) -> Self{
+        Self{
+            key: key.to_string(),
+            value: value.to_string(),
+            help: help.to_string(),
+        }
+    }
+}
 
 pub struct Readme{
-    pub params: HashMap<String, String>,
+    pub params: Vec<Param>,
     pub blocks: Vec<String>,
 
 }
@@ -38,13 +52,13 @@ impl Readme {
         }
     }
 
-    fn get_params(content: &str) -> HashMap<String, String>{
-        let mut params: HashMap<String, String> = HashMap::new();
+    fn get_params(content: &str) -> Vec<Param>{
+        let mut params: Vec<Param> = Vec::new();
         let param_block = Self::get_block_content("params", content);
         println!("{}", &param_block);
-        let re = Regex::new(r"(.*)\s*:\s*(.*)\n").unwrap();
+        let re = Regex::new(r"(.*)\s*\((.*)\)\s*:\s*(.*)\n").unwrap();
         for cap in re.captures_iter(&param_block){
-            params.insert(cap[1].to_string(), cap[2].to_string());
+            params.push(Param::new(&cap[1], &cap[2], &cap[3]));
         }
         params
     }

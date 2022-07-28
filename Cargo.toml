@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 regex = "1.6"
 html_editor = "0.5"
+requestty = "0.4"
