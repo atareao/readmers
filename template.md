@@ -1,5 +1,4 @@
-
-<!-- start project-info -->
+<!-- start params -->
 <!--
 project_title: {{project_title}}
 gh_author: {{gh_author}}
@@ -16,8 +15,7 @@ lastcommit_badge_url: {{lastcommit_badge_url}}
 codefactor_badge_option: {{codefactor_badge_option}}
 codefactor_badge_url: {{codefactor_badge_url}}
 --->
-
-<!-- end project-info -->
+<!-- end params -->
 
 <!-- start badges -->
 
