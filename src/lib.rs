@@ -64,9 +64,9 @@ impl Readme {
         let mut params: Vec<Param> = Vec::new();
         let param_block = Self::get_block_content("params", content);
         println!("{}", &param_block);
-        let re = Regex::new(r"(.*)\s*\((.*)\)\s*:\s*(.*)\n").unwrap();
+        let re = Regex::new(r#"(.*)\s*\((.*)\)\s*:\s*"(.*)"\n"#).unwrap();
         for cap in re.captures_iter(&param_block){
-            params.push(Param::new(&cap[1], &cap[2], &cap[3]));
+            params.push(Param::new(&cap[1], &cap[3], &cap[2]));
         }
         params
     }

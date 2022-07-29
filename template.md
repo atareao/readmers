@@ -1,19 +1,19 @@
 <!-- start params -->
 <!--
-project_title (Título del proyecto):
-gh_author (Author del proyecto):
-gh_project (Url de GitHib del proyecto):
-license (Licencia del proyecto):
-icon (Icon of the project):
-homepage: {{homepage}}
-license_badge_option: {{license_badge_option}}
-license_badge_url: {{license_badge_url}}
-contributors_badge_option: {{contributors_badge_option}}
-contributors_badge_url: {{contributors_badge_url}}
-lastcommit_badge_option: {{lastcommit_badge_option}}
-lastcommit_badge_url: {{lastcommit_badge_url}}
-codefactor_badge_option: {{codefactor_badge_option}}
-codefactor_badge_url: {{codefactor_badge_url}}
+project_title (Título del proyecto): ""
+gh_author (Author del proyecto): ""
+gh_project (Url de GitHib del proyecto): ""
+license (Licencia del proyecto): ""
+icon (Icon of the project): ""
+homepage (Homepage): ""
+license_badge_option (Has License badge): ""
+license_badge_url (): ""
+contributors_badge_option (): ""
+contributors_badge_url (): ""
+lastcommit_badge_option (): ""
+lastcommit_badge_url (): ""
+codefactor_badge_option (): ""
+codefactor_badge_url (): ""
 --->
 <!-- end params -->
 
