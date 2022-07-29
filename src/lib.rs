@@ -21,7 +21,9 @@
 // SOFTWARE.
 
 use regex::Regex;
+use std::fmt::{Display, Formatter, Result};
 
+#[derive(Debug)]
 pub struct Param{
     pub key: String,
     pub value: String,
@@ -35,6 +37,12 @@ impl Param{
             value: value.to_string(),
             help: help.to_string(),
         }
+    }
+}
+
+impl Display for Param {
+    fn fmt(&self, f:&mut Formatter) ->Result{
+        write!(f, "{} ({}): {}", self.key, self.help, self.value)
     }
 }
 

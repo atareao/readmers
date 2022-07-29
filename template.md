@@ -1,10 +1,10 @@
 <!-- start params -->
 <!--
-project_title: {{project_title}}
-gh_author: {{gh_author}}
-gh_project: {{gh_project}}
-license: {{licence}}
-icon: {{icon}}
+project_title (Título del proyecto):
+gh_author (Author del proyecto):
+gh_project (Url de GitHib del proyecto):
+license (Licencia del proyecto):
+icon (Icon of the project):
 homepage: {{homepage}}
 license_badge_option: {{license_badge_option}}
 license_badge_url: {{license_badge_url}}
