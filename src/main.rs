@@ -28,14 +28,15 @@ use html_editor::operation::{Selector, Queryable};
 use html_editor::parse;
 use html_editor::Node::Text;
 use crate::lib::Readme;
+use requestty::{prompt, Question};
 
-use html_editor;
+
 
 
 fn main() {
     let content = read_file("template.md").unwrap();
     // println!("{:?}", content);
-    let mut dom = parse(&content).unwrap();
+    let dom = parse(&content).unwrap();
     let selector = Selector::from("#project_title");
     let elements = dom.query_all(&selector);
     for mut element in elements {
@@ -48,8 +49,23 @@ fn main() {
     println!("{:?}", readme.blocks);
     println!("{:?}", readme.params);
 
+    let mut questions: Vec<Question> = Vec::new();
 
-
+    for param in readme.params{
+        let mut message: String;
+        if !param.help.is_empty(){
+            message = param.help.to_string();
+        }else{
+            message = param.key.to_string();
+        }
+        if !param.value.is_empty(){
+            message = format!("{} ({})", &message, &param.value);
+        }
+        questions.push(Question::input(param.key)
+                       .message(&message)
+                       .build())
+    }
+    prompt(questions);
 }
 
 fn read_file(filename: &str) -> Result<String, Error>{
