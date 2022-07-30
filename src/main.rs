@@ -29,12 +29,56 @@ use html_editor::parse;
 use html_editor::Node::Text;
 use crate::lib::Readme;
 use requestty::{prompt, Question};
-
-
-
+use glob::glob;
 
 fn main() {
-    let content = read_file("template.md").unwrap();
+    menu()
+}
+
+fn menu(){
+    let questions = vec![
+        Question::select("option")
+            .message("Select option")
+            .choices(vec![
+                "Open README file".to_string(),
+                "Create README file".to_string(),
+            ])
+            .build(),
+    ];
+    let selection = prompt(questions).unwrap();
+    println!("{:?}", selection);
+    if selection.contains_key("option"){
+        if let Some(selected) = selection.get("option"){
+            if selected.as_list_item().unwrap().index == 0{
+                select_files();
+            }
+        }
+    }
+}
+
+fn select_files(){
+    let paths = fs::read_dir("./").unwrap();
+    let mut filenames: Vec<String> = Vec::new();
+    for path in paths{
+        filenames.push(path.unwrap().path().display().to_string());
+    }
+    let questions = vec![
+        Question::select("file")
+            .message("Select file")
+            .choices(filenames)
+            .build(),
+    ];
+    let selection = prompt(questions).unwrap();
+    if selection.
+
+}
+
+fn read_file(filename: &str) -> Result<String, Error>{
+    fs::read_to_string(filename)
+}
+
+fn open_file(filename: &str){
+    let content = read_file(filename).unwrap();
     // println!("{:?}", content);
     let dom = parse(&content).unwrap();
     let selector = Selector::from("#project_title");
@@ -65,9 +109,5 @@ fn main() {
                        .message(&message)
                        .build())
     }
-    prompt(questions);
-}
-
-fn read_file(filename: &str) -> Result<String, Error>{
-    fs::read_to_string(filename)
+    let result = prompt(questions);
 }

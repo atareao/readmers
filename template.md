@@ -1,6 +1,6 @@
 <!-- start params -->
 <!--
-project_title (Título del proyecto): ""
+project_title (Título del proyecto): "Readme maker"
 gh_author (Author del proyecto): ""
 gh_project (Url de GitHib del proyecto): ""
 license (Licencia del proyecto): ""
