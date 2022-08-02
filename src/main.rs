@@ -69,8 +69,6 @@ fn select_files(){
             .build(),
     ];
     let selection = prompt(questions).unwrap();
-    if selection.
-
 }
 
 fn read_file(filename: &str) -> Result<String, Error>{
