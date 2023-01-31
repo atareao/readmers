@@ -29,10 +29,10 @@ use html_editor::parse;
 use html_editor::Node::Text;
 use crate::lib::Readme;
 use requestty::{prompt, Question};
-use glob::glob;
 
 fn main() {
-    menu()
+    let badgets = include_str!("resources/badgets.md");
+    println!("Badgets: {}", badgets);
 }
 
 fn menu(){
