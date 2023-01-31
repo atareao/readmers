@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 mod lib;
+mod readme;
 
 use std::fs;
 use std::io::Error;
@@ -28,47 +29,10 @@ use html_editor::operation::{Selector, Queryable};
 use html_editor::parse;
 use html_editor::Node::Text;
 use crate::lib::Readme;
-use requestty::{prompt, Question};
 
 fn main() {
     let badgets = include_str!("resources/badgets.md");
     println!("Badgets: {}", badgets);
-}
-
-fn menu(){
-    let questions = vec![
-        Question::select("option")
-            .message("Select option")
-            .choices(vec![
-                "Open README file".to_string(),
-                "Create README file".to_string(),
-            ])
-            .build(),
-    ];
-    let selection = prompt(questions).unwrap();
-    println!("{:?}", selection);
-    if selection.contains_key("option"){
-        if let Some(selected) = selection.get("option"){
-            if selected.as_list_item().unwrap().index == 0{
-                select_files();
-            }
-        }
-    }
-}
-
-fn select_files(){
-    let paths = fs::read_dir("./").unwrap();
-    let mut filenames: Vec<String> = Vec::new();
-    for path in paths{
-        filenames.push(path.unwrap().path().display().to_string());
-    }
-    let questions = vec![
-        Question::select("file")
-            .message("Select file")
-            .choices(filenames)
-            .build(),
-    ];
-    let selection = prompt(questions).unwrap();
 }
 
 fn read_file(filename: &str) -> Result<String, Error>{
@@ -90,22 +54,4 @@ fn open_file(filename: &str){
     let readme = Readme::new(&content);
     println!("{:?}", readme.blocks);
     println!("{:?}", readme.params);
-
-    let mut questions: Vec<Question> = Vec::new();
-
-    for param in readme.params{
-        let mut message: String;
-        if !param.help.is_empty(){
-            message = param.help.to_string();
-        }else{
-            message = param.key.to_string();
-        }
-        if !param.value.is_empty(){
-            message = format!("{} ({})", &message, &param.value);
-        }
-        questions.push(Question::input(param.key)
-                       .message(&message)
-                       .build())
-    }
-    let result = prompt(questions);
 }
