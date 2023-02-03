@@ -18,3 +18,4 @@ tera = { version = "1.17", features = ["builtins"] }
 # Yaml
 serde = { version = "1", features = ["derive"] }
 serde_yaml = "0.9"
+serde
