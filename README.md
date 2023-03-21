@@ -5,12 +5,14 @@ A script to create awesome README
 To easy mantain the README file, I will use variables at the start of this file. As much variables as I need. For example,
 
 ```html
-<!-- start params
-variable1: valor1
-variable2: valor2
+<!-- start params -->
+<!--
+variable1: valor1 # help valor 1
+variable2: valor2 # help valor 2
 variable3:
 variable3_hidden: true
-# end params -->
+-->
+<!-- end params -->
 ```
 
 The `_hidden` suffix indicates that element is hidden or not not. If it isn't present, indicates that is visible by default.

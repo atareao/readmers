@@ -93,5 +93,24 @@ impl Readme {
         let re = Regex::new(&pattern).unwrap();
         re.captures(content).unwrap()[1].to_string()
     }
+}
 
+#[cfg(test)]
+mod tests {
+    use std::{fs::File, io::Write};
+
+    const FILE: &str = "sample.md";
+
+    fn setup(){
+        let mut f = File::create(FILE).unwrap();
+        f.write(b"Esto es un ejemplo");
+    }
+    fn tear_down(){
+        std::fs::remove_file(FILE);
+    }
+    #[test]
+    fn read(){
+        setup();
+
+    }
 }
